@@ -11,6 +11,7 @@ var cssnext = archetype.devRequire("postcss-cssnext");
 
 var autoprefixer = archetype.devRequire("autoprefixer-stylus");
 var cssLoader = archetype.devRequire.resolve("css-loader");
+var sassLoader = archetype.devRequire.resolve("sass-loader");
 var styleLoader = archetype.devRequire.resolve("style-loader");
 var stylusLoader = archetype.devRequire.resolve("stylus-relative-loader");
 var postcssLoader = archetype.devRequire.resolve("postcss-loader");
@@ -52,6 +53,11 @@ module.exports = function () {
       name: "extract-css",
       test: /\.css$/,
       loader: ExtractTextPlugin.extract(styleLoader, cssQuery)
+    },
+     {
+      name: "extract-scss",
+      test: /\.scss$/,
+      loader: ExtractTextPlugin.extract(styleLoader, cssLoader, sassLoader)
     }];
 
     if (!cssModuleSupport) {
